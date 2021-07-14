@@ -1,0 +1,47 @@
+export const palette = {
+  a: '#03254c',
+  b: '#1167b1',
+  c: '#187bcd',
+  d: '#2a9df4',
+  e: '#d0efff',
+}
+
+let isDarkMode = false;
+
+export const color = {
+  primary: palette.a,
+  secondary: palette.b,
+  tertiary: '#c3c3c7',
+
+  textDark: palette.a,
+  textLight: '#707070',
+
+  background: 'white',
+  border: '#e8e8eb',
+
+  white: 'white',
+  black: 'black',
+}
+
+const darkTheme = {
+  primary: 'black',
+  secondary: 'black',
+  tertiary: 'black',
+
+  textDark: 'black',
+  textLight: 'black',
+
+  background: 'black',
+  border: 'black',
+
+  white: 'white',
+  black: 'black',
+}
+
+export function getColor() {
+  if (isDarkMode)
+    return { ...darkTheme };
+  return { ...color };
+}
+
+
