@@ -2,15 +2,15 @@ import { ScrollView, Text, View, StyleSheet } from "react-native";
 import React from "react";
 import { color, getColor } from "../../../../../assets/colors/color";
 
-const Tab2 = () => {
+const Workout = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab 2</Text>
+      <Text style={styles.title}>Work out</Text>
     </View>
   )
 }
 
-export default Tab2;
+export default Workout;
 
 const styles = StyleSheet.create({
   container: {
