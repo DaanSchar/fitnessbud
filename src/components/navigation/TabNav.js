@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { color, getColor } from "../../../assets/colors/color";
 import { StyleSheet, Text, View } from "react-native";
-import Home from "../screens/home/Home";
-import Tab1 from "../screens/home/Tab1";
-import Tab2 from "../screens/home/Tab2";
+import Home from "../screens/home/screens/Home";
+import Tab1 from "../screens/home/screens/Tab1";
+import Tab2 from "../screens/home/screens/Tab2";
 
 const Tab = createBottomTabNavigator();
 

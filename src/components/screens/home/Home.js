@@ -1,29 +1,36 @@
-import { ScrollView, Text, View, StyleSheet } from "react-native";
-import React from "react";
+import React from 'react';
+import { SafeAreaView, Text, View, StyleSheet, ScrollView, StatusBar, TouchableOpacity } from "react-native";
 import { color, getColor } from "../../../../assets/colors/color";
+import Feather from "react-native-vector-icons/Feather";
+import TopMenu from "../../menu/TopMenu";
+import TabNav from "../../navigation/TabNav";
 
-const Home = () => {
-  return (
+
+const Home = ({ navigation }) => {
+  return(
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <StatusBar backgroundColor={getColor().background} barStyle={'dark-content'}/>
+      <TopMenu navigation={navigation}/>
+      <TabNav/>
     </View>
   )
 }
 
-export default Home;
+export default (Home);
+
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: getColor().white,
     flex: 1,
-    backgroundColor: getColor().background,
+  },
+  bottomMenuContainer: {
+    flexDirection: 'row',
+    backgroundColor: getColor().white,
+    justifyContent: 'space-around',
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  bottomMenuItem: {
     padding: 20,
   },
-
-  title: {
-    fontSize: 35,
-    fontFamily: 'DMSans-Bold',
-    color: getColor().textDark,
-  }
 })

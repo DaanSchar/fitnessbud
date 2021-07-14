@@ -1,6 +1,6 @@
 import { ScrollView, Text, View, StyleSheet } from "react-native";
 import React from "react";
-import { color, getColor } from "../../../../assets/colors/color";
+import { color, getColor } from "../../../../../assets/colors/color";
 
 const Tab1 = () => {
   return (

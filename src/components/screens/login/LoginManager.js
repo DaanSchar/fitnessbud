@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import TabNav from "../../navigation/TabNav";
 import RootStackScreen from "./RootStackScreen";
 import LoadingScreen from "../LoadingScreen";
-import Home from "../Home";
+import Home from "../home/Home";
 import Tab from "native-base/src/components/composites/Tabs/Tab";
 import AppNavigation from "../../navigation/AppNavigator";
 

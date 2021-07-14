@@ -1,13 +1,15 @@
 import { ScrollView, Text, View, StyleSheet, StatusBar } from "react-native";
 import React from "react";
-import { color, getColor } from "../../../assets/colors/color";
-import TopMenu from "../menu/TopMenu";
+import { color, getColor } from "../../../../assets/colors/color";
+import TopMenu from "../../menu/TopMenu";
 
 const Profile = ({ navigation }) => {
   return (
       <View style={styles.container}>
         <TopMenu navigation={navigation}/>
-        <Text style={styles.title}>Profile</Text>
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>Profile</Text>
+        </View>
       </View>
   )
 }
@@ -18,9 +20,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: getColor().background,
-    alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  contentContainer: {
+    flex: 1,
     padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   title: {
