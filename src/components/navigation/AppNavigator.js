@@ -1,6 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerContent } from "./DrawerContent";
 import Profile from "../screens/profile/Profile";

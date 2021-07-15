@@ -4,28 +4,27 @@ import SplashScreen from "./SplashScreen";
 import SignInScreen from "./SignInScreen";
 import SignUpScreen from "./SignUpScreen";
 import { color, getColor } from "../../../../assets/colors/color";
-import LinearGradient from "react-native-linear-gradient";
 import { StyleSheet, View } from "react-native";
 
 
-const RootStack = createStackNavigator();
+const Stack = createStackNavigator();
 
-const RootStackScreen = ({ navigation }) => {
+const LoginStack = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <RootStack.Navigator headerMode='none'>
-        <RootStack.Screen name='SplashScreen' component={SplashScreen}/>
-        <RootStack.Screen name='SignInScreen' component={SignInScreen}/>
-        <RootStack.Screen name='SignUpScreen' component={SignUpScreen}/>
+      <Stack.Navigator headerMode='none'>
+        <Stack.Screen name='SplashScreen' component={SplashScreen}/>
+        <Stack.Screen name='SignInScreen' component={SignInScreen}/>
+        <Stack.Screen name='SignUpScreen' component={SignUpScreen}/>
 
-      </RootStack.Navigator>
+      </Stack.Navigator>
     </View>
 
   )
 }
 
-export default RootStackScreen;
+export default LoginStack;
 
 const styles = StyleSheet.create({
   container: {

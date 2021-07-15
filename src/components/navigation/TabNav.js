@@ -5,7 +5,8 @@ import { color, getColor } from "../../../assets/colors/color";
 import { StyleSheet, Text, View } from "react-native";
 import Home from "../screens/home/screens/Home";
 import Tab1 from "../screens/home/screens/Tab1";
-import Workout from "../screens/home/screens/Workout";
+import Workout from "../screens/home/screens/workout/Workout";
+import WorkoutStack from "../screens/home/screens/workout/WorkoutStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +41,7 @@ const TabNav = () => {
     >
       { tabScreen('Home', Home, 'home')}
       { tabScreen('Tab1', Tab1, 'bar-chart')}
-      { tabScreen('Workout', Workout, 'fitness-center')}
+      { tabScreen('Workout', WorkoutStack, 'fitness-center')}
     </Tab.Navigator>
   )
 }
