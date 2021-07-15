@@ -17,7 +17,9 @@ const Workout = ({ navigation }) => {
       {/* Workout FlatList*/}
       <View style={styles.listContainer}>
         <FlatList data={workoutData} keyExtractor={(workout) => workout.id} renderItem={ ({ item } ) => (
-          <WorkOutCard workout={item}/>
+          <TouchableOpacity onPress={() => {}}>
+            <WorkOutCard workout={item}/>
+          </TouchableOpacity>
         )} />
       </View>
 
