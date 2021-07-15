@@ -48,7 +48,6 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <LinearGradient style={styles.container} colors={[getColor().primary, getColor().secondary]}>
-      <StatusBar backgroundColor={getColor().primary} barStyle={'light-content'}/>
       {/* Header */}
       <View style={styles.headerWrapper}>
         <Animatable.View animation='bounceIn' duration={2000}>

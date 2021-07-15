@@ -9,7 +9,6 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const SplashScreen = ({ navigation }) => {
   return (
     <LinearGradient style={styles.container} colors={[getColor().primary, getColor().secondary]}>
-      <StatusBar backgroundColor={color.primary} barStyle={'light-content'}/>
 
       {/* Header */}
       <View style={styles.headerWrapper}>

@@ -44,7 +44,6 @@ const SignInScreen = ({ navigation, login }) => {
 
   return (
      <LinearGradient style={styles.container} colors={[getColor().primary, getColor().secondary]}>
-        <StatusBar backgroundColor={getColor().primary} barStyle={'light-content'}/>
 
       {/* Header */}
       <View style={styles.headerWrapper}>

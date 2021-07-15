@@ -9,8 +9,6 @@ import TabNav from "../../navigation/TabNav";
 const Home = ({ navigation }) => {
   return(
     <View style={styles.container}>
-      <StatusBar backgroundColor={getColor().background} barStyle={'dark-content'}/>
-      <TopMenu navigation={navigation}/>
       <TabNav/>
     </View>
   )

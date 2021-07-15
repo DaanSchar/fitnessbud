@@ -4,12 +4,14 @@ import { getColor } from "../../../../../../assets/colors/color";
 import Feather from "react-native-vector-icons/Feather";
 import WorkOutCard from "./components/WorkoutCard";
 import { workoutData } from "../../../../../../assets/data/workoutData";
+import TopMenu from "../../../../menu/TopMenu";
 
-const Workout = () => {
+const Workout = ({ navigation }) => {
 
 
   return (
     <View style={styles.container}>
+      <TopMenu navigation={navigation}/>
       <Text style={styles.title}>Pick a Workout</Text>
 
       {/* Workout FlatList*/}
@@ -20,7 +22,7 @@ const Workout = () => {
       </View>
 
       {/* Create New Workout Button*/}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('WorkoutCreator')}>
         <View style={styles.button}>
           <Text style={styles.buttonTitle}>Create new Workout</Text>
           <Feather name={'plus'} color={getColor().background} size={20}/>

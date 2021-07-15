@@ -10,7 +10,7 @@ const TopMenu = ({ navigation }) => {
 
       {/* Menu Button*/}
       <TouchableOpacity onPress={() => navigation.openDrawer()}>
-        <Feather name='menu' size={26} color={getColor().primary}/>
+        <Feather name='menu' size={30} color={getColor().primary}/>
       </TouchableOpacity>
 
     </View>
