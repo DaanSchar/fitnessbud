@@ -7,6 +7,7 @@ import Home from "../screens/home/screens/Home";
 import Tab1 from "../screens/home/screens/Tab1";
 import Workout from "../screens/home/screens/workout/Workout";
 import WorkoutStack from "../screens/home/screens/workout/WorkoutStack";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,7 @@ const TabNav = () => {
           (
             <View style={styles.itemContainer}>
               <View style={[styles.item, (focused ? styles.selectedItem : null)]}>
-                <MaterialIcons name={iconName} size={26} color={focused ? getColor().primary : getColor().tertiary}/>
+                <MaterialCommunityIcons name={iconName} size={26} color={focused ? getColor().primary : getColor().tertiary}/>
               </View>
               {focused ? <Text style={styles.itemText}>{name}</Text> : null}
             </View>
@@ -40,8 +41,8 @@ const TabNav = () => {
       }}
     >
       { tabScreen('Home', Home, 'home')}
-      { tabScreen('Tab1', Tab1, 'bar-chart')}
-      { tabScreen('Workout', WorkoutStack, 'fitness-center')}
+      { tabScreen('Tab1', Tab1, 'chart-timeline-variant')}
+      { tabScreen('Workout', WorkoutStack, 'weight-lifter')}
     </Tab.Navigator>
   )
 }
