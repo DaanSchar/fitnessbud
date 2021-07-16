@@ -28,10 +28,17 @@ const ExerciseCard = ({exercise, exercises, incrementExerciseQuantity, decrement
 
 
             {/* minus button*/}
-            <TouchableOpacity onPress={() => decrementExerciseQuantity(exercise)}>
-              <Feather name={'minus'} color={getColor().primary} size={26}/>
-            </TouchableOpacity>
-
+            {
+              exercise.quantity > 1 ? (
+                  <TouchableOpacity onPress={() => decrementExerciseQuantity(exercise)}>
+                    <Feather name={"minus"} color={getColor().primary} size={26} />
+                  </TouchableOpacity>
+                ) : (
+                <TouchableOpacity onPress={() => decrementExerciseQuantity(exercise)}>
+                  <Feather name={"x"} color={getColor().delete} size={26} />
+                </TouchableOpacity>
+              )
+            }
 
           </View>
 
@@ -102,6 +109,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     borderColor: getColor().secondary,
     paddingHorizontal: 10,
+    width: 82,
   },
   category: {
     fontFamily: 'DMSans-Medium',

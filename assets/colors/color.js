@@ -21,6 +21,7 @@ export const color = {
 
   white: 'white',
   black: 'black',
+  delete: '#9a0c0c',
 }
 
 const darkTheme = {

@@ -34,7 +34,7 @@ function addExercise(state, action) {
 function addTitle(state, action) {
   return {
     ...state,
-    name: action.name,
+    name: action.title,
   }
 }
 
@@ -54,5 +54,7 @@ function decrementExerciseQuantity(state, action) {
     if ( exercises[i].id === action.exercise.id)
       if ( !(exercises[i].quantity <= 1))
         exercises[i].quantity -= 1;
+      else
+        exercises = exercises.filter(function( exercise) { return exercise.id !== exercises[i].id});
   return { ...state, exercises: [...exercises] };
 }

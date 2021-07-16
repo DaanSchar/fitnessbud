@@ -6,10 +6,11 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
 import { connect } from "react-redux";
 import * as workoutCreatorActions from "../../../../../store/workout/workoutcreator/workoutCreatorActions";
+import * as workoutActions from "../../../../../store/workout/workout/workoutActions";
 import ExerciseCard from "./components/ExerciseCard";
 
 
-const WorkoutCreator = ({ navigation, exercises, workoutName, addTitle}) => {
+const WorkoutCreator = ({ navigation, exercises, workoutName, addTitle, addWorkout}) => {
   return (
     <View style={styles.container}>
 
@@ -20,30 +21,45 @@ const WorkoutCreator = ({ navigation, exercises, workoutName, addTitle}) => {
 
 
         <View style={styles.contentContainer}>
+          <TouchableOpacity onPress={() => console.log(workoutName)}>
           <Text style={styles.Title}>Create new Workout</Text>
+          </TouchableOpacity>
 
           {/* Text Input*/}
           <View style={styles.inputWrapper}>
             <MaterialIcons name={'edit'} size={15} color={getColor().textLight}/>
-            <TextInput style={styles.nameInput} placeholder={'Name of you workout'} onChangeText={(text) => addTitle(text)}/>
+            <TextInput style={styles.nameInput} placeholder={'Name of you workout'} onChangeText={text => addTitle(text)}/>
           </View>
 
 
           {/*  Add Exercise Button */}
-          <TouchableOpacity onPress={() => navigation.navigate('ExerciseList')}>
-            <View style={styles.addButton}>
-              <Text style={styles.buttonTitle}>Add Exercise</Text>
-              <Feather name={'plus'} color={getColor().background} size={20}/>
-            </View>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('ExerciseList')}>
+              <View style={styles.addButton}>
+                <Text style={styles.buttonTitle}>Add Exercise</Text>
+                <Feather name={'plus'} color={getColor().background} size={20}/>
+              </View>
+            </TouchableOpacity>
+          </View>
 
           {/* Exercise list*/}
           <View style={styles.listContainer}>
             <FlatList data={exercises} keyExtractor={(exercise) => exercise.id} renderItem={ ({ item } ) => (
-              <TouchableOpacity onPress={() => {console.log(item)}}>
-                <ExerciseCard exercise={item}/>
-              </TouchableOpacity>
+              <ExerciseCard exercise={item}/>
             )} />
+          </View>
+
+          {/* done Button*/}
+          <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={() => {
+            navigation.goBack();
+            addWorkout(workoutName, exercises);
+          }}>
+            <View style={styles.createButton}>
+              <Text style={styles.buttonTitle}>Done</Text>
+              <Feather name={'check'} color={getColor().background} size={20}/>
+            </View>
+          </TouchableOpacity>
           </View>
 
         </View>
@@ -58,8 +74,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatch,
     addTitle: (title) => dispatch(workoutCreatorActions.addTitle(title)),
+    addWorkout: (name, exercises) => dispatch(workoutActions.addWorkout(name, exercises)),
   }
 }
 
@@ -86,6 +102,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: 'DMSans-Bold',
     color: getColor().textDark,
+  },
+  listContainer: {
+    height: '60%',
   },
 
   text: {
@@ -126,5 +145,18 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 5,
     paddingVertical: 5,
+  },
+
+  createButton: {
+    marginBottom: 20,
+    backgroundColor: getColor().primary,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingRight: 5,
+  },
+  buttonContainer: {
+    alignItems: 'center',
   },
 })
