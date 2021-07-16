@@ -18,6 +18,8 @@ export const workoutCreatorReducer = (state = initialState, action) => {
       return reset();
     case 'SET':
       return set(state, action);
+    case 'DELETE_EXERCISE':
+      return deleteExercise(state, action);
   }
   return state;
 }
@@ -59,8 +61,6 @@ function decrementExerciseQuantity(state, action) {
     if ( exercises[i].id === action.exercise.id)
       if ( !(exercises[i].quantity <= 1))
         exercises[i].quantity -= 1;
-      else
-        exercises = exercises.filter(function(exercise) { return exercise.id !== exercises[i].id});
   return { ...state, exercises: [...exercises] };
 }
 
@@ -79,4 +79,15 @@ function set(state, action) {
     name: workout.name,
     exercises: workout.exercises,
   }
+}
+
+function deleteExercise(state, action) {
+  let exercises = state.exercises;
+  exercises = exercises.filter(function(exercise) { return exercise.id !== action.exercise.id});
+
+  return {
+    ...state,
+    exercises: exercises,
+  }
+
 }

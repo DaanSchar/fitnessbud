@@ -134,16 +134,16 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    paddingHorizontal: 20,
   },
   Title: {
+    marginHorizontal: 20,
     marginTop: 15,
     fontSize: 30,
     fontFamily: 'DMSans-Bold',
     color: getColor().textDark,
   },
   listContainer: {
-    height: '60%',
+    height: '56%',
   },
 
   text: {
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
 
   // name input
   inputWrapper: {
+    marginHorizontal: 20,
     marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
@@ -167,6 +168,7 @@ const styles = StyleSheet.create({
     fontFamily: 'DMSans-Medium',
   },
   errorTitle: {
+    marginHorizontal: 20,
     fontSize: 15,
     fontFamily: 'DMSans-Regular',
     color: getColor().error,

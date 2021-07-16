@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginHorizontal: 20,
     marginBottom: 20,
+    backgroundColor: getColor().background
   },
   exercisesContainer: {
     paddingHorizontal: 15,

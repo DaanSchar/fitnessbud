@@ -30,7 +30,7 @@ function addNewWorkout(state, workout) {
 
   let id;
 
-  state.workouts.length === 0 ? id = '1' : parseInt(state.workouts[state.workouts.length - 1].id) + 1;
+  state.workouts.length === 0 ? id = '1' : id = (parseInt(state.workouts[state.workouts.length - 1].id) + 1).toString();
 
   return { ...state, workouts: [...state.workouts, { ...workout, id: id }]};
 }

@@ -21,3 +21,7 @@ export const reset = () => {
 export const set = (workout) => {
   return { type: 'SET', workout: workout}
 }
+
+export const deleteExercise = (exercise) => {
+  return { type: 'DELETE_EXERCISE', exercise : exercise}
+}
