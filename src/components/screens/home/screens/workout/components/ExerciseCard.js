@@ -64,16 +64,9 @@ const ExerciseCard = ({exercise, exercises, incrementExerciseQuantity, decrement
         <View style={styles.topContainer}>
           <Text style={styles.name}>{ exercise.name }</Text>
           <View style={styles.quantityContainer}>
-
-            {/* Button*/}
-
-
-              <View style={styles.quantityHolder}>
-                <Text style={styles.category}>{ exercise.quantity}  Set{ exercise.quantity > 1 ? 's' : ''}</Text>
-              </View>
-
-
-
+            <View style={styles.quantityHolder}>
+              <Text style={styles.category}>{ exercise.quantity}  Set{ exercise.quantity > 1 ? 's' : ''}</Text>
+            </View>
           </View>
         </View>
         <Text style={styles.category}>{ exercise.category }</Text>
@@ -184,5 +177,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: getColor().primary,
     borderRadius: 30,
+    marginLeft: 5,
   }
 })

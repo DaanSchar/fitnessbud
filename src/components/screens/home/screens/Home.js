@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 35,
+    flex: 0.6,
     alignSelf: 'center',
     fontFamily: 'DMSans-Bold',
     color: getColor().textDark,
