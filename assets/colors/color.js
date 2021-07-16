@@ -22,6 +22,7 @@ export const color = {
   white: 'white',
   black: 'black',
   delete: '#9a0c0c',
+  error: 'red',
 }
 
 const darkTheme = {

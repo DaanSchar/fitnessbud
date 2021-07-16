@@ -1,3 +1,3 @@
-export const addWorkout = (name, exercises) => {
-  return { type: 'ADD_WORKOUT', name: name, exercises: exercises}
+export const addWorkout = (workout) => {
+  return { type: 'ADD_WORKOUT', workout: workout,}
 }

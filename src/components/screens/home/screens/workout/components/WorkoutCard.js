@@ -4,10 +4,12 @@ import { getColor } from "../../../../../../../assets/colors/color";
 import React from "react";
 import { workoutData } from "../../../../../../../assets/data/workoutData";
 import { exercisesData } from "../../../../../../../assets/data/exercisesData";
+import * as workoutCreatorActions from "../../../../../../store/workout/workoutcreator/workoutCreatorActions";
+import * as workoutActions from "../../../../../../store/workout/workout/workoutActions";
+import { connect } from "react-redux";
 
-const WorkOutCard = (props) => {
+const WorkOutCard = ({ navigation, workout, setWorkout}) => {
 
-  const workout = props.workout;
   const exercises = workout.exercises;
   const name = workout.name
 
@@ -22,10 +24,10 @@ const WorkOutCard = (props) => {
       <View style={styles.topContainer}>
 
         {/* Card Title*/}
-        <Text style={styles.workoutTitle}>{ name }</Text>
+        <Text numberOfLines={1} style={styles.workoutTitle}>{ name }</Text>
 
         {/* Edit Button */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate('WorkoutCreator'); setWorkout(workout)}}>
           <Feather name={'edit'} size={24} color={getColor().primary}/>
         </TouchableOpacity>
 
@@ -57,7 +59,23 @@ const WorkOutCard = (props) => {
   )
 }
 
-export default WorkOutCard;
+
+const mapStateToProps = (state, ownProps) => ({
+  navigation: ownProps.navigation,
+  workout: ownProps.workout,
+  exercises: state.workoutCreator.exercises,
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTitle: (title) => dispatch(workoutCreatorActions.addTitle(title)),
+    addWorkout: (name, exercises) => dispatch(workoutActions.addWorkout(name, exercises)),
+    setWorkout: (workout) => dispatch(workoutCreatorActions.set(workout)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkOutCard);
+
 
 const styles = StyleSheet.create({
   container: {
@@ -83,6 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'DMSans-Bold',
     color: getColor().textDark,
+    width: '90%',
   },
   exercisesContainContainer: {
     flexDirection: 'row',

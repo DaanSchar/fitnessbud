@@ -9,7 +9,7 @@ import * as workoutCreatorActions from "../../../../../store/workout/workoutcrea
 import * as workoutActions from "../../../../../store/workout/workout/workoutActions";
 import { connect } from "react-redux";
 
-const Workout = ({ navigation, workouts }) => {
+const Workout = ({ navigation, workouts, resetCreator }) => {
 
 
   return (
@@ -21,16 +21,16 @@ const Workout = ({ navigation, workouts }) => {
 
       {/* Workout FlatList*/}
       <View style={styles.listContainer}>
-        <FlatList data={workouts.workouts} keyExtractor={(workout) => workout.id} renderItem={ ({ item } ) => (
+        <FlatList data={workouts.reverse()} keyExtractor={(workout) => workout.id} renderItem={ ({ item } ) => (
           <TouchableOpacity onPress={() => {}}>
-            <WorkOutCard workout={item}/>
+            <WorkOutCard workout={item} navigation={navigation}/>
           </TouchableOpacity>
         )} />
       </View>
 
       {/* Create New Workout Button*/}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('WorkoutCreator')}>
+        <TouchableOpacity onPress={() => {navigation.navigate("WorkoutCreator"); resetCreator()}}>
           <View style={styles.button}>
             <Text style={styles.buttonTitle}>Create new Workout</Text>
             <Feather name={'plus'} color={getColor().background} size={20}/>
@@ -43,13 +43,14 @@ const Workout = ({ navigation, workouts }) => {
 
 
 const mapStateToProps = (state, ownProps) => ({
-  workouts: state.workout,
+  workouts: state.workout.workouts,
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addTitle: (title) => dispatch(workoutCreatorActions.addTitle(title)),
     addWorkout: (name, exercises) => dispatch(workoutActions.addWorkout(name, exercises)),
+    resetCreator: () => dispatch(workoutCreatorActions.reset()),
   }
 }
 

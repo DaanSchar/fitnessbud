@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, ScrollView, TextInput, TouchableOpacity, FlatList } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { getColor } from "../../../../../../assets/colors/color";
 import BackButton from "../../../../menu/BackButton";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -10,7 +10,35 @@ import * as workoutActions from "../../../../../store/workout/workout/workoutAct
 import ExerciseCard from "./components/ExerciseCard";
 
 
-const WorkoutCreator = ({ navigation, exercises, workoutName, addTitle, addWorkout}) => {
+const WorkoutCreator = ({ navigation, exercises, workoutName, workoutId, addTitle, addWorkout}) => {
+
+  const [errorName, setErrorName] = useState(false);
+  const [errorExercise, setErrorExercise] = useState(false);
+
+  function onClickDoneButton()  {
+    if (workoutName === '')
+      setErrorName(true);
+    if (exercises.length < 1) {
+      setErrorExercise(true);
+    }
+    if (workoutName.length > 0 && exercises.length > 0)
+      done();
+  }
+
+  function done() {
+    addWorkout({ id: workoutId, name: workoutName, exercises: exercises });
+    navigation.goBack();
+  }
+
+  function editTitle(text) {
+    addTitle(text)
+
+    if (text.length > 0) {
+      setErrorName(false);
+    }
+  }
+
+
   return (
     <View style={styles.container}>
 
@@ -21,25 +49,38 @@ const WorkoutCreator = ({ navigation, exercises, workoutName, addTitle, addWorko
 
 
         <View style={styles.contentContainer}>
-          <TouchableOpacity onPress={() => console.log(workoutName)}>
-          <Text style={styles.Title}>Create new Workout</Text>
+          <TouchableOpacity onPress={() => console.log(exercises)}>
+          <Text style={styles.Title}>{workoutId === '-1' ? 'Create new Workout' : 'Edit Workout'}</Text>
           </TouchableOpacity>
 
           {/* Text Input*/}
           <View style={styles.inputWrapper}>
             <MaterialIcons name={'edit'} size={15} color={getColor().textLight}/>
-            <TextInput style={styles.nameInput} placeholder={'Name of you workout'} onChangeText={text => addTitle(text)}/>
+            <TextInput style={styles.nameInput} placeholder={'Name of your workout'} onChangeText={text => editTitle(text)}>{workoutName}</TextInput>
           </View>
-
+          <View style={{height: 18, marginTop: 5,}}>
+          {
+            errorName? <Text style={styles.errorTitle}>You didn't enter a name for your workout</Text> : null
+          }
+          </View>
 
           {/*  Add Exercise Button */}
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('ExerciseList')}>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate("ExerciseList");
+              setErrorExercise(false);
+            }}>
               <View style={styles.addButton}>
                 <Text style={styles.buttonTitle}>Add Exercise</Text>
                 <Feather name={'plus'} color={getColor().background} size={20}/>
               </View>
             </TouchableOpacity>
+          </View>
+
+          <View style={{height: 18, marginTop: 5, alignItems: 'center'}}>
+            {
+              errorExercise? <Text style={styles.errorTitle}>You didn't add any exercises</Text> : null
+            }
           </View>
 
           {/* Exercise list*/}
@@ -51,10 +92,7 @@ const WorkoutCreator = ({ navigation, exercises, workoutName, addTitle, addWorko
 
           {/* done Button*/}
           <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => {
-            navigation.goBack();
-            addWorkout(workoutName, exercises);
-          }}>
+          <TouchableOpacity onPress={() => onClickDoneButton()}>
             <View style={styles.createButton}>
               <Text style={styles.buttonTitle}>Done</Text>
               <Feather name={'check'} color={getColor().background} size={20}/>
@@ -68,6 +106,7 @@ const WorkoutCreator = ({ navigation, exercises, workoutName, addTitle, addWorko
 }
 
 const mapStateToProps = (state, ownProps) => ({
+  workoutId: state.workoutCreator.id,
   workoutName: state.workoutCreator.name,
   exercises: state.workoutCreator.exercises,
 })
@@ -127,10 +166,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'DMSans-Medium',
   },
+  errorTitle: {
+    fontSize: 15,
+    fontFamily: 'DMSans-Regular',
+    color: getColor().error,
+  },
 
   // button
   addButton: {
-    marginTop: 50,
+    marginTop: 30,
     backgroundColor: getColor().primary,
     borderRadius: 10,
     width: 170,

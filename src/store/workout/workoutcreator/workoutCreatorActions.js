@@ -13,3 +13,11 @@ export const incrementExerciseQuantity = (exercise) => {
 export const decrementExerciseQuantity = (exercise) => {
   return { type: 'DECREMENT_EXERCISE_QUANTITY', exercise: exercise}
 }
+
+export const reset = () => {
+  return { type: 'RESET' }
+}
+
+export const set = (workout) => {
+  return { type: 'SET', workout: workout}
+}

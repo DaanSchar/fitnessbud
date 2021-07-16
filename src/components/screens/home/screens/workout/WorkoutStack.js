@@ -17,7 +17,6 @@ const LoginStack = ({ navigation }) => {
         <Stack.Screen name='Workout' component={Workout}/>
         <Stack.Screen name='WorkoutCreator' component={WorkoutCreator}/>
         <Stack.Screen name='ExerciseList' component={ExerciseList}/>
-
       </Stack.Navigator>
     </View>
 

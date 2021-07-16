@@ -1,21 +1,21 @@
 export const exercisesData = [
   {
-    id: '1',
+    id: '0',
     name: 'Bench Press',
     category: 'Chest',
   },
   {
-    id: '2',
+    id: '1',
     name: 'Barbell Squat',
     category: 'Legs'
   },
   {
-    id: '3',
+    id: '2',
     name: 'Dumbbell Curls',
     category: 'Biceps'
   },
   {
-    id: '4',
+    id: '3',
     name: 'Overhead Press',
     category: 'Shoulders'
   }
