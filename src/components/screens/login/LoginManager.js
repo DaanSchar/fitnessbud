@@ -33,6 +33,7 @@ const LoginManager = ({ retrieveToken, login, logout, register, loginState, }) =
 
   useEffect(() => {
     setTimeout(() => {
+      console.log(loginState)
       retrieveToken(loginState.userToken);
     }, 1000 )
   },[])

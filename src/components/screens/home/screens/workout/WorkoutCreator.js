@@ -1,14 +1,17 @@
-import { Text, View, StyleSheet, ScrollView, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, ScrollView, TextInput, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 import { getColor } from "../../../../../../assets/colors/color";
 import BackButton from "../../../../menu/BackButton";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
+import { connect } from "react-redux";
+import * as workoutCreatorActions from "../../../../../store/workout/workoutcreator/workoutCreatorActions";
+import ExerciseCard from "./components/ExerciseCard";
 
 
-const WorkoutCreator = ({ navigation }) => {
+const WorkoutCreator = ({ navigation, exercises, workoutName, addTitle}) => {
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
 
         {/*Top Menu*/}
         <View style={styles.topMenu}>
@@ -22,7 +25,7 @@ const WorkoutCreator = ({ navigation }) => {
           {/* Text Input*/}
           <View style={styles.inputWrapper}>
             <MaterialIcons name={'edit'} size={15} color={getColor().textLight}/>
-            <TextInput style={styles.nameInput} placeholder={'Name of you workout'}/>
+            <TextInput style={styles.nameInput} placeholder={'Name of you workout'} onChangeText={(text) => addTitle(text)}/>
           </View>
 
 
@@ -34,12 +37,33 @@ const WorkoutCreator = ({ navigation }) => {
             </View>
           </TouchableOpacity>
 
+          {/* Exercise list*/}
+          <View style={styles.listContainer}>
+            <FlatList data={exercises} keyExtractor={(exercise) => exercise.id} renderItem={ ({ item } ) => (
+              <TouchableOpacity onPress={() => {console.log(item)}}>
+                <ExerciseCard exercise={item}/>
+              </TouchableOpacity>
+            )} />
+          </View>
+
         </View>
-    </ScrollView>
+    </View>
   )
 }
 
-export default WorkoutCreator;
+const mapStateToProps = (state, ownProps) => ({
+  workoutName: state.workoutCreator.name,
+  exercises: state.workoutCreator.exercises,
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+    addTitle: (title) => dispatch(workoutCreatorActions.addTitle(title)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutCreator);
 
 const styles = StyleSheet.create({
   container: {
