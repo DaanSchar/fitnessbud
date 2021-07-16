@@ -6,6 +6,8 @@ export const workoutReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_WORKOUT':
       return addWorkout(state, action);
+    case 'DELETE_WORKOUT':
+      return deleteWorkout(state, action);
   }
   return state;
 }
@@ -25,8 +27,10 @@ function addWorkout(state, action) {
 }
 
 function addNewWorkout(state, workout) {
-  let newId = parseInt(state.workouts[state.workouts.length - 1].id) + 1;
-  let id = newId.toString()
+
+  let id;
+
+  state.workouts.length === 0 ? id = '1' : parseInt(state.workouts[state.workouts.length - 1].id) + 1;
 
   return { ...state, workouts: [...state.workouts, { ...workout, id: id }]};
 }
@@ -43,3 +47,9 @@ function replaceWorkout(state, workout) {
   return {...state, workouts: [...state.workouts, workout]};
 }
 
+function deleteWorkout(state, action) {
+  return {
+    ...state,
+    workouts: state.workouts.filter( function(workout) { return workout.id !== action.workout.id } ),
+  }
+}

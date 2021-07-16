@@ -60,7 +60,7 @@ function decrementExerciseQuantity(state, action) {
       if ( !(exercises[i].quantity <= 1))
         exercises[i].quantity -= 1;
       else
-        exercises = exercises.filter(function( exercise) { return exercise.id !== exercises[i].id});
+        exercises = exercises.filter(function(exercise) { return exercise.id !== exercises[i].id});
   return { ...state, exercises: [...exercises] };
 }
 

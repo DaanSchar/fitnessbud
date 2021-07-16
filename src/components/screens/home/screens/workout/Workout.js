@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, FlatList, Animated} from "react-native";
 import React from "react";
 import { getColor } from "../../../../../../assets/colors/color";
 import Feather from "react-native-vector-icons/Feather";
@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 
 const Workout = ({ navigation, workouts, resetCreator }) => {
 
-
   return (
     <View style={styles.container}>
       <TopMenu navigation={navigation}/>
@@ -22,9 +21,7 @@ const Workout = ({ navigation, workouts, resetCreator }) => {
       {/* Workout FlatList*/}
       <View style={styles.listContainer}>
         <FlatList data={workouts.reverse()} keyExtractor={(workout) => workout.id} renderItem={ ({ item } ) => (
-          <TouchableOpacity onPress={() => {}}>
-            <WorkOutCard workout={item} navigation={navigation}/>
-          </TouchableOpacity>
+          <WorkOutCard workout={item} navigation={navigation}/>
         )} />
       </View>
 
@@ -100,4 +97,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
   },
+
+  // delete
+  deleteContainer: {
+    paddingLeft: 15,
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+
 })
