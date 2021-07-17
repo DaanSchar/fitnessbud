@@ -21,6 +21,7 @@ const Workout = ({ navigation, selectedWorkout }) => {
 
   const [isPaused, setIsPaused] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [key, setKey] = useState(0);
 
 
   // timer
@@ -30,13 +31,12 @@ const Workout = ({ navigation, selectedWorkout }) => {
       <CountdownCircleTimer
         isPlaying={isPaused}
         size={50}
+        key={key}
         strokeWidth={5}
         duration={10}
         trailColor={'white'}
-        onComplete={() => { setIsPaused(false); return [true, 0]}}
-        colors={[
-          [getColor().primary, 1.0],
-        ]}
+        onComplete={() => { setTimeout(function() {setIsPaused(false);setKey(key + 1)}, 1000);return [false, 0]}}
+        colors={[[getColor().primary, 1.0],]}
       >
         {({ remainingTime }) => (
           <Animated.Text style={{ color: getColor().background }}>
