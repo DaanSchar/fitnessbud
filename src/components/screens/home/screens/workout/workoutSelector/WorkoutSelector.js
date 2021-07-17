@@ -1,27 +1,32 @@
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, Animated} from "react-native";
 import React from "react";
-import { getColor } from "../../../../../../assets/colors/color";
+import { getColor } from "../../../../../../../assets/colors/color";
 import Feather from "react-native-vector-icons/Feather";
 import WorkOutCard from "./components/WorkoutCard";
-import { workoutData } from "../../../../../../assets/data/workoutData";
-import TopMenu from "../../../../menu/TopMenu";
-import * as workoutCreatorActions from "../../../../../store/workout/workoutcreator/workoutCreatorActions";
-import * as workoutActions from "../../../../../store/workout/workout/workoutActions";
+import { workoutData } from "../../../../../../../assets/data/workoutData";
+import TopMenu from "../../../../../menu/TopMenu";
+import * as workoutCreatorActions from "../../../../../../store/workout/workoutcreator/workoutCreatorActions";
+import * as workoutActions from "../../../../../../store/workout/workoutselector/workoutActions";
 import { connect } from "react-redux";
 
-const Workout = ({ navigation, workouts, resetCreator }) => {
+const WorkoutSelector = ({ navigation, workouts, resetCreator, selectWorkout }) => {
 
   return (
     <View style={styles.container}>
+      {/* Top Menu */}
       <TopMenu navigation={navigation}/>
+
+      {/* Title */}
       <TouchableOpacity onPress={() => console.log(workouts)}>
       <Text style={styles.title}>Pick a Workout</Text>
       </TouchableOpacity>
 
-      {/* Workout FlatList*/}
+      {/* WorkoutSelector FlatList*/}
       <View style={styles.listContainer}>
-        <FlatList data={workouts.reverse()} keyExtractor={(workout) => workout.id} renderItem={ ({ item } ) => (
-          <WorkOutCard workout={item} navigation={navigation}/>
+        <FlatList data={workouts} keyExtractor={(workout) => workout.id} renderItem={ ({ item } ) => (
+          <TouchableOpacity onPress={() => {navigation.navigate("Workout"); selectWorkout(item) }}>
+            <WorkOutCard workout={item} navigation={navigation}/>
+          </TouchableOpacity>
         )} />
       </View>
 
@@ -39,7 +44,7 @@ const Workout = ({ navigation, workouts, resetCreator }) => {
 }
 
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   workouts: state.workout.workouts,
 })
 
@@ -48,10 +53,11 @@ const mapDispatchToProps = (dispatch) => {
     addTitle: (title) => dispatch(workoutCreatorActions.addTitle(title)),
     addWorkout: (name, exercises) => dispatch(workoutActions.addWorkout(name, exercises)),
     resetCreator: () => dispatch(workoutCreatorActions.reset()),
+    selectWorkout: (workout) => dispatch(workoutActions.selectWorkout(workout)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Workout);
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutSelector);
 
 
 const styles = StyleSheet.create({

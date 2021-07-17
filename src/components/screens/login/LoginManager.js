@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from '../../context'
 import * as loginActions from '../../../store/login/loginActions'
 import { connect } from "react-redux";
-import LoadingScreen from "../LoadingScreen";
+import LoadingScreen from "../loadingscreens/LoadingScreen";
 import AppNavigation from "../../navigation/AppNavigator";
 
 

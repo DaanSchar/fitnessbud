@@ -1,50 +1,51 @@
 import { Animated, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import React from "react";
-import { getColor } from "../../../../../../../assets/colors/color";
+import { getColor } from "../../../../../../../../assets/colors/color";
 import { connect } from "react-redux";
-import * as workoutCreatorActions from "../../../../../../store/workout/workoutcreator/workoutCreatorActions";
+import * as workoutCreatorActions from "../../../../../../../store/workout/workoutcreator/workoutCreatorActions";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
 const ExerciseCard = ({exercise, exercises, incrementExerciseQuantity, decrementExerciseQuantity, deleteExercise,}) => {
 
+  // left swipe view
   const leftSwipe = (progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [0, 50],
-      outputRange: [0, 1],
-    });
+    const scale = dragX.interpolate({ inputRange: [0, 50], outputRange: [0, 1], });
+
     return (
       <View style={styles.swipeLeftContainer}>
         <TouchableOpacity onPress={() => deleteExercise(exercise)}>
           <Animated.View style={{ transform: [{ scale: scale }] }}>
+
+            {/* delete button*/}
             <View style={styles.delete}>
               <Feather name={'trash-2'} color={getColor().background} size={26} />
             </View>
+
           </Animated.View>
         </TouchableOpacity>
       </View>
     )
   }
 
+  // right swipe view
   const rightSwipe = (progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [0, 100],
-      outputRange: [0, 1],
-    });
+    const scale = dragX.interpolate({ inputRange: [0, 100], outputRange: [0, 1], });
+
     return (
       <View style={styles.swipeRightContainer}>
         <Animated.View style={{ transform: [{ scale: scale }] }}>
 
           <View style={styles.buttonContainer}>
 
-            {/* add */}
+            {/* add button */}
             <TouchableOpacity onPress={() => {incrementExerciseQuantity(exercise)}}>
                 <View style={styles.add}>
                   <Feather name={'plus'} color={getColor().background} size={30} />
                 </View>
             </TouchableOpacity>
 
-            {/* remove */}
+            {/* remove button */}
             <TouchableOpacity onPress={() => {decrementExerciseQuantity(exercise)}}>
                 <View style={styles.remove}>
                   <Feather name={'minus'} color={getColor().primary} size={30} />
@@ -61,15 +62,24 @@ const ExerciseCard = ({exercise, exercises, incrementExerciseQuantity, decrement
   return (
     <Swipeable renderLeftActions={leftSwipe} renderRightActions={rightSwipe}>
       <View style={styles.container}>
+
         <View style={styles.topContainer}>
+
+          {/* name title*/}
           <Text style={styles.name}>{ exercise.name }</Text>
+
+          {/* quantity title*/}
           <View style={styles.quantityContainer}>
             <View style={styles.quantityHolder}>
               <Text style={styles.category}>{ exercise.quantity}  Set{ exercise.quantity > 1 ? 's' : ''}</Text>
             </View>
           </View>
+
         </View>
+
+        {/* category title*/}
         <Text style={styles.category}>{ exercise.category }</Text>
+
       </View>
     </Swipeable>
   )
@@ -167,13 +177,13 @@ const styles = StyleSheet.create({
   },
   add: {
     backgroundColor: getColor().primary,
-    padding: 8,
+    padding: 6,
     borderRadius: 30,
     marginRight: 3,
   },
   remove: {
     backgroundColor: getColor().white,
-    padding: 6.5,
+    padding: 4.5,
     borderWidth: 1.5,
     borderColor: getColor().primary,
     borderRadius: 30,

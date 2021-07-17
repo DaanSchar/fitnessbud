@@ -1,11 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import React from "react";
-import { getColor } from "../../../../../../../assets/colors/color";
+import { getColor } from "../../../../../../../../assets/colors/color";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const ExerciseSelectionCard = (props) => {
+const ExerciseCard = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -17,7 +17,7 @@ const ExerciseSelectionCard = (props) => {
   )
 }
 
-export default ExerciseSelectionCard;
+export default ExerciseCard;
 
 const styles = StyleSheet.create({
   container: {

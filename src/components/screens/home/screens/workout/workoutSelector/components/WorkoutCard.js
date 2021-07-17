@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View, Animated } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
-import { getColor } from "../../../../../../../assets/colors/color";
+import { getColor } from "../../../../../../../../assets/colors/color";
 import React from "react";
-import { exercisesData } from "../../../../../../../assets/data/exercisesData";
-import * as workoutCreatorActions from "../../../../../../store/workout/workoutcreator/workoutCreatorActions";
-import * as workoutActions from "../../../../../../store/workout/workout/workoutActions";
+import { exercisesData } from "../../../../../../../../assets/data/exercisesData";
+import * as workoutCreatorActions from "../../../../../../../store/workout/workoutcreator/workoutCreatorActions";
+import * as workoutActions from "../../../../../../../store/workout/workoutselector/workoutActions";
 import { connect } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 

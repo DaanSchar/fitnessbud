@@ -1,6 +1,6 @@
 import { ActivityIndicator, StyleSheet } from "react-native";
 import React from "react";
-import { color, getColor } from "../../../assets/colors/color";
+import { color, getColor } from "../../../../assets/colors/color";
 import LinearGradient from "react-native-linear-gradient";
 
 const LoadingScreen = () => {

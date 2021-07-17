@@ -1,7 +1,7 @@
 import { ScrollView, Text, View, StyleSheet, StatusBar } from "react-native";
 import React from "react";
-import { color, getColor } from "../../../../../assets/colors/color";
-import TopMenu from "../../../menu/TopMenu";
+import { color, getColor } from "../../../../../../assets/colors/color";
+import TopMenu from "../../../../menu/TopMenu";
 
 const Home = ({ navigation }) => {
   return (

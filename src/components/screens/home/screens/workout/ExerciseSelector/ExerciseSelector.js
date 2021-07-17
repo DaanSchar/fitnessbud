@@ -1,40 +1,43 @@
-import React, { useState } from "react";
-import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import BackButton from "../../../../menu/BackButton";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import Feather from "react-native-vector-icons/Feather";
-import { getColor } from "../../../../../../assets/colors/color";
-import ExerciseSelectionCard from "./components/ExerciseSelectionCard";
-import { exercisesData } from "../../../../../../assets/data/exercisesData";
-import * as workoutCreatorActions from "../../../../../store/workout/workoutcreator/workoutCreatorActions";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import BackButton from "../../../../../menu/BackButton";
+import React from 'react';
+import { getColor } from "../../../../../../../assets/colors/color";
+import ExerciseCard from "./components/ExerciseCard";
+import { exercisesData } from "../../../../../../../assets/data/exercisesData";
+import * as workoutCreatorActions from "../../../../../../store/workout/workoutcreator/workoutCreatorActions";
 import { connect } from "react-redux";
 
 
-const ExerciseList = ({ navigation, addExercise}) => {
+const ExerciseSelector = ({ navigation, addExercise}) => {
 
-  const [selected, setSelected] = useState('');
 
   return (
     <View style={styles.container}>
 
       {/*Top Menu*/}
       <View style={styles.topMenu}>
-        <BackButton navigation={navigation}/>
+        <TouchableOpacity onPress={() => navigation.navigate('WorkoutCreator')}>
+          <BackButton/>
+        </TouchableOpacity>
       </View>
 
 
       <View style={styles.contentContainer}>
+
+        {/* Title*/}
         <Text style={styles.Title}>Choose Exercise</Text>
 
-        {/* Exercise list*/}
+        {/* Exercises list */}
         <View style={styles.listContainer}>
           <FlatList data={exercisesData} keyExtractor={(exercise) => exercise.id} renderItem={ ({ item } ) => (
             <TouchableOpacity onPress={() => {addExercise(item); navigation.goBack();}}>
-              <ExerciseSelectionCard exercise={item}/>
+              <ExerciseCard exercise={item}/>
             </TouchableOpacity>
           )} />
         </View>
+
       </View>
+
     </View>
   )
 }
@@ -46,7 +49,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(ExerciseList);
+export default connect(null, mapDispatchToProps)(ExerciseSelector);
 
 const styles = StyleSheet.create({
   container: {

@@ -1,5 +1,8 @@
 const { workoutData } = require("../../../../assets/data/workoutData");
-const initialState = { workouts: workoutData};
+const initialState = {
+  workouts: workoutData,
+  selectedWorkout: null
+};
 
 export const workoutReducer = (state = initialState, action) => {
 
@@ -8,6 +11,8 @@ export const workoutReducer = (state = initialState, action) => {
       return addWorkout(state, action);
     case 'DELETE_WORKOUT':
       return deleteWorkout(state, action);
+    case 'SELECT_WORKOUT':
+      return selectWorkout(state, action);
   }
   return state;
 }
@@ -50,6 +55,16 @@ function replaceWorkout(state, workout) {
 function deleteWorkout(state, action) {
   return {
     ...state,
-    workouts: state.workouts.filter( function(workout) { return workout.id !== action.workout.id } ),
+    workouts: state.workouts.filter(function(workout) {
+      return workout.id !== action.workout.id
+    }),
   }
+}
+
+function selectWorkout(state, action) {
+  return {
+  ...state,
+  selectedWorkout: action.workout,
+  }
+
 }

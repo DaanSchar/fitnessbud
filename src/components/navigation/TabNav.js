@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { color, getColor } from "../../../assets/colors/color";
 import { StyleSheet, Text, View } from "react-native";
-import Home from "../screens/home/screens/Home";
-import Tab1 from "../screens/home/screens/Tab1";
-import Workout from "../screens/home/screens/workout/Workout";
-import WorkoutStack from "../screens/home/screens/workout/WorkoutStack";
+import Home from "../screens/home/screens/home/Home";
+import Tab1 from "../screens/home/screens/tab1/Tab1";
+import Workout from "../screens/home/screens/workout/workoutSelector/WorkoutSelector";
+import WorkoutStack from "./WorkoutStack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Tab = createBottomTabNavigator();
@@ -52,12 +52,14 @@ export default TabNav;
 
 const styles = StyleSheet.create({
   container: {
-    borderTopWidth: 1.5,
+    borderTopWidth: 2,
     borderTopColor: getColor().border,
     flexDirection: 'column',
     backgroundColor: getColor().background,
     justifyContent: 'space-around',
     height: 60,
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
   },
   item: {
     paddingTop: 8,
