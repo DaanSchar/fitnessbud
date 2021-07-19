@@ -52,7 +52,6 @@ export default TabNav;
 
 const styles = StyleSheet.create({
   container: {
-    borderTopWidth: 2,
     borderTopColor: getColor().border,
     flexDirection: 'column',
     backgroundColor: getColor().background,

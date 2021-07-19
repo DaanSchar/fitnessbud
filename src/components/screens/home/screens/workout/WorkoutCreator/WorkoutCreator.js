@@ -52,7 +52,7 @@ const WorkoutCreator = ({ navigation, exercises, workoutName, workoutId, addTitl
           {/* Text Input*/}
           <View style={styles.inputWrapper}>
             <MaterialIcons name={'edit'} size={15} color={getColor().textLight}/>
-            <TextInput style={styles.nameInput} placeholder={'Name of your workoutselector'} onChangeText={text => editTitle(text)}>{workoutName}</TextInput>
+            <TextInput style={styles.nameInput} placeholder={'Name of your workout'} onChangeText={text => editTitle(text)}>{workoutName}</TextInput>
           </View>
 
           {/* no name error message*/}

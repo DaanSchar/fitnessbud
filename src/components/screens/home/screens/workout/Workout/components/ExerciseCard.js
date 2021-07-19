@@ -71,8 +71,8 @@ const ExerciseCard = ({ exercise, activeWorkout, addWeightToSet, addRepsToSet, a
         <View style={styles.setContainer}>
           <Feather name={'pocket'} color={exerciseIsDone ? getColor().success : getColor().primary} size={15}/>
           <Text style={[styles.setTitle, exerciseIsDone ? {color: getColor().success} : {color: getColor().primary}]}> { number } :  </Text>
-          <TextInput style={styles.setInput} placeholder={'Reps'} onChangeText={text => changeRep(text)}></TextInput>
-          <TextInput style={styles.setInput} placeholder={'Weight'} onChangeText={text => changeWeight(text)}></TextInput>
+          <TextInput keyboardType={"numeric"} style={[styles.setInput, { width: '33%'}]} maxLength={3} placeholder={'Reps'} onChangeText={text => changeRep(text)}></TextInput>
+          <TextInput keyboardType={"numeric"} style={[styles.setInput, { width: '33%'}]} maxLength={3} placeholder={'Weight'} onChangeText={text => changeWeight(text)}></TextInput>
           <Feather name={'check-circle'} size={20} color={ repIsDone && weightIsDone ? 'green' : getColor().textLight }/>
         </View>
       </View>
@@ -90,10 +90,11 @@ const ExerciseCard = ({ exercise, activeWorkout, addWeightToSet, addRepsToSet, a
           </TouchableHighlight>
         </View>
 
-        {/* Reps*/}
+        {/* Sets */}
         {
           setArray.map((number) => { return set(number) })
         }
+
       </View>
     </View>
   )
@@ -157,8 +158,6 @@ const styles = StyleSheet.create({
   setInput: {
     fontSize: 20,
     fontFamily: 'DMSans-Regular',
-    borderRadius: 20,
-    width: '35%',
   },
   setTitle: {
     width: '20%',

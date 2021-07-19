@@ -17,10 +17,6 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import Carousel from "./components/Carousel";
 
-/**
- * TODO: fix little gray border on the bottom of the screen
- * ( no, not the navigation border,there seems to be a border in the actual workout screen.)
- */
 
 const Workout = ({ navigation, selectedWorkout, isFinished}) => {
 
@@ -189,6 +185,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: getColor().background,
+    paddingBottom: '10%',
   },
   topContainer: {
     marginTop: 20,

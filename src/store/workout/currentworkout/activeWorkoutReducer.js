@@ -86,8 +86,6 @@ function isFinishedExercise(array) {
 }
 
 function isFinishedWorkout(state, exercises) {
-
-
   for (let i =0; i < exercises.length; i++)
     if (!(exercises[i].isFinishedReps && exercises[i].isFinishedWeight))
       return false;
