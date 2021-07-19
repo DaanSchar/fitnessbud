@@ -8,8 +8,9 @@ import TopMenu from "../../../../../menu/TopMenu";
 import * as workoutCreatorActions from "../../../../../../store/workout/workoutcreator/workoutCreatorActions";
 import * as workoutActions from "../../../../../../store/workout/workoutselector/workoutActions";
 import { connect } from "react-redux";
+import * as activeWorkoutActions from "../../../../../../store/workout/currentworkout/activeWorkoutActions";
 
-const WorkoutSelector = ({ navigation, workouts, resetCreator, selectWorkout }) => {
+const WorkoutSelector = ({ navigation, workouts, resetCreator, selectWorkout, initActiveWorkout }) => {
 
   return (
     <View style={styles.container}>
@@ -24,7 +25,7 @@ const WorkoutSelector = ({ navigation, workouts, resetCreator, selectWorkout }) 
       {/* WorkoutSelector FlatList*/}
       <View style={styles.listContainer}>
         <FlatList data={workouts} keyExtractor={(workout) => workout.id} renderItem={ ({ item } ) => (
-          <TouchableOpacity onPress={() => {navigation.navigate("Workout"); selectWorkout(item) }}>
+          <TouchableOpacity onPress={() => {navigation.navigate("Workout"); selectWorkout(item); initActiveWorkout(item)}}>
             <WorkOutCard workout={item} navigation={navigation}/>
           </TouchableOpacity>
         )} />
@@ -54,6 +55,7 @@ const mapDispatchToProps = (dispatch) => {
     addWorkout: (name, exercises) => dispatch(workoutActions.addWorkout(name, exercises)),
     resetCreator: () => dispatch(workoutCreatorActions.reset()),
     selectWorkout: (workout) => dispatch(workoutActions.selectWorkout(workout)),
+    initActiveWorkout: (workout) => dispatch(activeWorkoutActions.initActiveWorkout(workout)),
   }
 }
 

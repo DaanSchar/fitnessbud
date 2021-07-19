@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   Modal,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback, ScrollView,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import { connect } from "react-redux";
@@ -17,8 +17,12 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import Carousel from "./components/Carousel";
 
+/**
+ * TODO: fix little gray border on the bottom of the screen
+ * ( no, not the navigation border,there seems to be a border in the actual workout screen.)
+ */
 
-const Workout = ({ navigation, selectedWorkout }) => {
+const Workout = ({ navigation, selectedWorkout, isFinished}) => {
 
   // modal
   const [modalVisible, setModalVisible] = useState(false);
@@ -121,52 +125,55 @@ const Workout = ({ navigation, selectedWorkout }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
+      <View style={styles.container}>
 
-      {/* Timer  Modal */}
-      { modal() }
+        {/* Timer  Modal */}
+        { modal() }
 
-      <View style={styles.topContainer}>
+        <View style={styles.topContainer}>
 
-        {/*Workout Title */}
-        <Text style={styles.workoutName}>{selectedWorkout.name}</Text>
+          {/*Workout Title */}
+          <Text style={styles.workoutName}>{selectedWorkout.name}</Text>
 
-        {/*  rest button */}
-        <View style={styles.restButton}>
-          <TouchableOpacity onPress={() => setIsPaused(!isPaused)} onLongPress={() => setModalVisible(true)}>
-            <View style={styles.icon}/>
+          {/*  rest button */}
+          <View style={styles.restButton}>
+            <TouchableOpacity onPress={() => setIsPaused(!isPaused)} onLongPress={() => setModalVisible(true)}>
+              <View style={styles.icon}/>
 
-            <View style={styles.timer}>
-              {timer()}
-            </View>
+              <View style={styles.timer}>
+                {timer()}
+              </View>
 
-            <View style={styles.pauseIcon}>
-              {isPaused ? null : <MaterialIcons name={"pause"} color={getColor().background} size={26} />}
+              <View style={styles.pauseIcon}>
+                {isPaused ? null : <MaterialIcons name={"pause"} color={getColor().background} size={26} />}
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Flat list */}
+        <Carousel selectedWorkout={selectedWorkout}/>
+
+        {/* Finish Button*/}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity>
+            <View style={[styles.finishButton, isFinished ? { borderColor: getColor().success } : null ]}>
+              <Text style={[styles.buttonText, isFinished ? { color: getColor().success } : null ]}>Finish Workout </Text>
+              <MaterialIcons name={'check-circle-outline'} size={26} color={isFinished ? getColor().success : getColor().primary}/>
             </View>
           </TouchableOpacity>
         </View>
+
       </View>
-
-      {/* Flat list */}
-      <Carousel selectedWorkout={selectedWorkout}/>
-
-      {/* Finish Button*/}
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity>
-          <View style={styles.finishButton}>
-            <Text style={styles.buttonText}>Finish Workout </Text>
-            <MaterialIcons name={'check-circle-outline'} size={26} color={getColor().primary}/>
-          </View>
-        </TouchableOpacity>
-      </View>
-
-    </View>
+    </ScrollView>
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({
   navigation: ownProps.navigation,
   selectedWorkout: state.workout.selectedWorkout,
+  isFinished: state.activeWorkout.isFinished,
 })
 
 const mapDispatchToProps = (dispatch) => {

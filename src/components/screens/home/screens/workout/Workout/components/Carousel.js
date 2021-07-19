@@ -33,8 +33,8 @@ const Carousel = ({ selectedWorkout }) => {
       {/* Paginator */}
       <View style={styles.paginator}>
         <Paginator data={selectedWorkout.exercises} scrollX={scrollX}/>
-
       </View>
+
     </View>
   )
 }

@@ -23,6 +23,8 @@ export const color = {
   black: 'black',
   delete: '#9a0c0c',
   error: 'red',
+
+  success: '#6cb67c'
 }
 
 const darkTheme = {
