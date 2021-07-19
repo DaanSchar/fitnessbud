@@ -1,4 +1,14 @@
-import { Text, View, StyleSheet, FlatList, Animated, TouchableOpacity, Alert, Modal } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  Animated,
+  TouchableOpacity,
+  Alert,
+  Modal,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React, { useRef, useState } from "react";
 import { connect } from "react-redux";
 import { getColor } from "../../../../../../../assets/colors/color";
@@ -7,33 +17,50 @@ import Paginator from "./components/Paginator";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
+import { Value } from "react-native-reanimated";
+import Carousel from "./components/Carousel";
 
 
 const Workout = ({ navigation, selectedWorkout }) => {
 
-  // FlatList
-  const scrollX = useRef(new Animated.Value(0)).current;
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50}).current;
-  const viewableItemsChanged = useRef(({ viewableItems }) => {
-    setCurrentIndex(viewableItems[0].index);
-  }).current;
-
-  const [isPaused, setIsPaused] = useState(false);
+  // modal
   const [modalVisible, setModalVisible] = useState(false);
+  const x = new Value(0);
+
+  // rest button
+  const [isPaused, setIsPaused] = useState(false);
+  const [time, setTime] = useState(90);
   const [key, setKey] = useState(0);
 
+  function incrementTime() {
+    setTime(time + 15)
+    setKey(key + 1);
+  }
+
+  function decrementTime(){
+    if (time > 15)
+      setTime(time - 15);
+    setKey(key + 1);
+  }
+
+  function getTime() {
+    let minutes = Math.floor(time/60);
+    let seconds = time % 60;
+
+    if (seconds > 0)
+      return minutes.toString() + ':' + seconds.toString();
+    return minutes.toString() + ':00';
+  }
 
   // timer
-  const timer = (time) => {
+  const timer = () => {
     return (
-
       <CountdownCircleTimer
         isPlaying={isPaused}
         size={50}
         key={key}
         strokeWidth={5}
-        duration={10}
+        duration={time}
         trailColor={'white'}
         onComplete={() => { setTimeout(function() {setIsPaused(false);setKey(key + 1)}, 1000);return [false, 0]}}
         colors={[[getColor().primary, 1.0],]}
@@ -47,21 +74,50 @@ const Workout = ({ navigation, selectedWorkout }) => {
     )
   }
 
-
-
   return (
     <View style={styles.container}>
+
+      {/* Timer  Modal */}
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
+        onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContentContainer}>
+            <View style={styles.modalTopContainer}>
+              <Text style={styles.modalTitle}>Set Rest Time</Text>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <Feather style={{}} name={'x'} size={32} color={getColor().textLight}/>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.timerContainer}>
+
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={() => incrementTime()}>
+                  <View style={styles.modalButton}>
+                    <Feather name={'plus'} size={35} color={getColor().background}/>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.timeContainer}>
+                <Text style={styles.timerTitle}>{ getTime() }</Text>
+              </View>
+
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={() => decrementTime()}>
+                  <View style={styles.modalButton}>
+                    <Feather name={'minus'} size={35} color={getColor().background}/>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <View>
+
+              </View>
+            </View>
           </View>
         </View>
 
@@ -74,9 +130,9 @@ const Workout = ({ navigation, selectedWorkout }) => {
 
         {/*  rest button */}
         <View style={styles.restButton}>
-          <TouchableOpacity onPress={() => setIsPaused(!isPaused)}>
+          <TouchableOpacity onPress={() => setIsPaused(!isPaused)} onLongPress={() => setModalVisible(true)}>
             <View style={styles.icon}/>
-            <View style={styles.timer}>{timer(10)}</View>
+            <View style={styles.timer}>{timer()}</View>
 
             <View style={styles.pauseIcon}>
               {isPaused ? null : <MaterialIcons name={"pause"} color={getColor().background} size={26} />}
@@ -85,37 +141,19 @@ const Workout = ({ navigation, selectedWorkout }) => {
         </View>
       </View>
 
-      <View style={styles.contentContainer}>
-        <View style={styles.listContainer}>
-          <FlatList data={selectedWorkout.exercises}
-                    keyExtractor={(exercise) => exercise.id}
-                    horizontal
-                    pagingEnabled
-                    bounce={false}
-                    showsHorizontalScrollIndicator={false}
-                    onViewableItemsChanged={viewableItemsChanged}
-                    viewabilityConfig={viewConfig}
-                    onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX } } }], {
-                      useNativeDriver: false,
-                    })}
-                    renderItem={ ({ item } ) => (
-                      <ExerciseCard exercise={item}/>
-                    )}/>
-          <View style={styles.paginator}>
-            <Paginator data={selectedWorkout.exercises} scrollX={scrollX}/>
-          </View>
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity>
-              <View style={styles.finishButton}>
-                <Text style={styles.buttonText}>Finish Workout </Text>
-                <MaterialIcons name={'check-circle-outline'} size={26} color={getColor().primary}/>
-              </View>
-            </TouchableOpacity>
-          </View>
+      <Carousel selectedWorkout={selectedWorkout}/>
 
-        </View>
+      {/* Finish Button*/}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity>
+          <View style={styles.finishButton}>
+            <Text style={styles.buttonText}>Finish Workout </Text>
+            <MaterialIcons name={'check-circle-outline'} size={26} color={getColor().primary}/>
+          </View>
+        </TouchableOpacity>
       </View>
+
     </View>
   )
 }
@@ -146,10 +184,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     alignItems: 'center',
   },
-  contentContainer: {
-  },
-  listContainer: {
-  },
 
   // modal
   modalContainer: {
@@ -159,10 +193,40 @@ const styles = StyleSheet.create({
   modalContentContainer: {
     marginTop: 100,
     marginHorizontal: 20,
-    padding: 50,
     backgroundColor: getColor().background,
     opacity: 1,
     borderRadius: 20,
+  },
+  modalTitle: {
+    fontSize: 25,
+    fontFamily: 'DMSans-Medium',
+    color: getColor().primary,
+    marginTop: 20,
+    marginLeft: 75,
+  },
+  modalButton: {
+    borderRadius: 100,
+    backgroundColor: getColor().primary,
+  },
+  timerContainer: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  timerTitle: {
+    fontSize: 25,
+    fontFamily: 'DMSans-Medium',
+    color: getColor().primary,
+  },
+  timeContainer: {
+    width: 100,
+    alignItems: 'center',
+  },
+  modalTopContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
   },
 
   // buttons
@@ -194,6 +258,7 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
+    marginBottom: 30,
     alignItems: 'center',
   },
 
@@ -211,10 +276,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontFamily: 'DMSans-Bold',
     color: getColor().textDark,
-    alignSelf: 'center',
-  },
-  paginator: {
-    marginTop: 50,
     alignSelf: 'center',
   },
 })
