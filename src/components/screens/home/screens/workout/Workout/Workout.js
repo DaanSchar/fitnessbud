@@ -12,12 +12,9 @@ import {
 import React, { useRef, useState } from "react";
 import { connect } from "react-redux";
 import { getColor } from "../../../../../../../assets/colors/color";
-import ExerciseCard from "./components/ExerciseCard";
-import Paginator from "./components/Paginator";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
-import { Value } from "react-native-reanimated";
 import Carousel from "./components/Carousel";
 
 
@@ -25,7 +22,6 @@ const Workout = ({ navigation, selectedWorkout }) => {
 
   // modal
   const [modalVisible, setModalVisible] = useState(false);
-  const x = new Value(0);
 
   // rest button
   const [isPaused, setIsPaused] = useState(false);
@@ -35,11 +31,13 @@ const Workout = ({ navigation, selectedWorkout }) => {
   function incrementTime() {
     setTime(time + 15)
     setKey(key + 1);
+    setIsPaused(false);
   }
 
   function decrementTime(){
     if (time > 15)
       setTime(time - 15);
+    setIsPaused(false);
     setKey(key + 1);
   }
 
@@ -52,7 +50,6 @@ const Workout = ({ navigation, selectedWorkout }) => {
     return minutes.toString() + ':00';
   }
 
-  // timer
   const timer = () => {
     return (
       <CountdownCircleTimer
@@ -74,10 +71,8 @@ const Workout = ({ navigation, selectedWorkout }) => {
     )
   }
 
-  return (
-    <View style={styles.container}>
-
-      {/* Timer  Modal */}
+  const modal = () => {
+    return (
       <Modal
         animationType="slide"
         transparent={true}
@@ -122,6 +117,14 @@ const Workout = ({ navigation, selectedWorkout }) => {
         </View>
 
       </Modal>
+    )
+  }
+
+  return (
+    <View style={styles.container}>
+
+      {/* Timer  Modal */}
+      { modal() }
 
       <View style={styles.topContainer}>
 
@@ -132,7 +135,10 @@ const Workout = ({ navigation, selectedWorkout }) => {
         <View style={styles.restButton}>
           <TouchableOpacity onPress={() => setIsPaused(!isPaused)} onLongPress={() => setModalVisible(true)}>
             <View style={styles.icon}/>
-            <View style={styles.timer}>{timer()}</View>
+
+            <View style={styles.timer}>
+              {timer()}
+            </View>
 
             <View style={styles.pauseIcon}>
               {isPaused ? null : <MaterialIcons name={"pause"} color={getColor().background} size={26} />}
@@ -141,7 +147,7 @@ const Workout = ({ navigation, selectedWorkout }) => {
         </View>
       </View>
 
-
+      {/* Flat list */}
       <Carousel selectedWorkout={selectedWorkout}/>
 
       {/* Finish Button*/}
@@ -227,6 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginHorizontal: 20,
+    marginBottom: 20,
   },
 
   // buttons
