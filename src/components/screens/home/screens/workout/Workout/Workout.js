@@ -2,28 +2,28 @@ import {
   Text,
   View,
   StyleSheet,
-  FlatList,
   Animated,
   TouchableOpacity,
-  Alert,
   Modal,
-  TouchableWithoutFeedback, ScrollView,
+  ScrollView,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { getColor } from "../../../../../../../assets/colors/color";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import Carousel from "./components/Carousel";
+import * as activeWorkoutActions from "../../../../../../store/workout/currentworkout/activeWorkoutActions";
 
 
-const Workout = ({ navigation, selectedWorkout, isFinished}) => {
+const Workout = ({ navigation, selectedWorkout, isFinished }) => {
 
   // modal
   const [modalVisible, setModalVisible] = useState(false);
+  const [unFinishModalVisible, setUnFinishModalVisible] = useState(false);
 
-  // rest button
+  // rest darkButton
   const [isPaused, setIsPaused] = useState(false);
   const [time, setTime] = useState(90);
   const [key, setKey] = useState(0);
@@ -50,6 +50,19 @@ const Workout = ({ navigation, selectedWorkout, isFinished}) => {
     return minutes.toString() + ':00';
   }
 
+  function finishWorkout() {
+    setUnFinishModalVisible(false);
+    navigation.navigate('PostWorkout');
+  }
+
+  function onClickFinishWorkout() {
+    if (isFinished) {
+      finishWorkout();
+    } else {
+      setUnFinishModalVisible(true);
+    }
+  }
+
   const timer = () => {
     return (
       <CountdownCircleTimer
@@ -71,7 +84,7 @@ const Workout = ({ navigation, selectedWorkout, isFinished}) => {
     )
   }
 
-  const modal = () => {
+  const timerModal = () => {
     return (
       <Modal
         animationType="slide"
@@ -120,19 +133,53 @@ const Workout = ({ navigation, selectedWorkout, isFinished}) => {
     )
   }
 
+  const unFinishModal = () => {
+    return (
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={unFinishModalVisible}
+        onRequestClose={() => setModalVisible(!modalVisible)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={[styles.modalContentContainer, { alignItems: 'center', paddingBottom: 30 }]}>
+              <Text style={styles.unFinishModalTitle}>You didnt finish all your exercises</Text>
+
+                <TouchableOpacity onPress={() => setUnFinishModalVisible(false)}>
+                  <View style={ [styles.finishButton, { width: 210, justifyContent: 'center', backgroundColor: getColor().primary, marginTop: 40 }] }>
+                    <Text style={ [styles.buttonText, { color: getColor().background }] }>Go Back </Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => finishWorkout()}>
+                  <View style={[styles.finishButton, { width: 210, justifyContent: 'center', marginTop: 15 }] }>
+                    <Text style={ styles.buttonText }>Finish Anyway </Text>
+                  </View>
+                </TouchableOpacity>
+
+
+          </View>
+        </View>
+      </Modal>
+    )
+  }
+
   return (
     <ScrollView>
       <View style={styles.container}>
 
         {/* Timer  Modal */}
-        { modal() }
+        { timerModal() }
+
+        {/* unFinishModal */}
+        { unFinishModal() }
 
         <View style={styles.topContainer}>
 
           {/*Workout Title */}
           <Text style={styles.workoutName}>{selectedWorkout.name}</Text>
 
-          {/*  rest button */}
+          {/*  rest darkButton */}
           <View style={styles.restButton}>
             <TouchableOpacity onPress={() => setIsPaused(!isPaused)} onLongPress={() => setModalVisible(true)}>
               <View style={styles.icon}/>
@@ -153,7 +200,7 @@ const Workout = ({ navigation, selectedWorkout, isFinished}) => {
 
         {/* Finish Button*/}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => onClickFinishWorkout()}>
             <View style={[styles.finishButton, isFinished ? { borderColor: getColor().success } : null ]}>
               <Text style={[styles.buttonText, isFinished ? { color: getColor().success } : null ]}>Finish Workout </Text>
               <MaterialIcons name={'check-circle-outline'} size={26} color={isFinished ? getColor().success : getColor().primary}/>
@@ -238,6 +285,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 20,
     marginBottom: 20,
+  },
+  unFinishModalTitle: {
+    fontSize: 25,
+    fontFamily: 'DMSans-Medium',
+    color: getColor().primary,
+    marginTop: 20,
   },
 
   // buttons

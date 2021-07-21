@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     color: getColor().textLight,
   },
 
-  //button
+  //darkButton
   buttonContainer: {
     marginTop: 30,
     alignItems: 'center',

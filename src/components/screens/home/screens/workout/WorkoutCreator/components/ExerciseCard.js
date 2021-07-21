@@ -17,7 +17,7 @@ const ExerciseCard = ({exercise, exercises, incrementExerciseQuantity, decrement
         <TouchableOpacity onPress={() => deleteExercise(exercise)}>
           <Animated.View style={{ transform: [{ scale: scale }] }}>
 
-            {/* delete button*/}
+            {/* delete darkButton*/}
             <View style={styles.delete}>
               <Feather name={'trash-2'} color={getColor().background} size={26} />
             </View>
@@ -38,14 +38,14 @@ const ExerciseCard = ({exercise, exercises, incrementExerciseQuantity, decrement
 
           <View style={styles.buttonContainer}>
 
-            {/* add button */}
+            {/* add darkButton */}
             <TouchableOpacity onPress={() => {incrementExerciseQuantity(exercise)}}>
                 <View style={styles.add}>
                   <Feather name={'plus'} color={getColor().background} size={30} />
                 </View>
             </TouchableOpacity>
 
-            {/* remove button */}
+            {/* remove darkButton */}
             <TouchableOpacity onPress={() => {decrementExerciseQuantity(exercise)}}>
                 <View style={styles.remove}>
                   <Feather name={'minus'} color={getColor().primary} size={30} />

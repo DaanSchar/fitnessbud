@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     width: '85%',
   },
 
-  //button
+  //darkButton
   buttonContainer: {
     marginTop: 30,
   },

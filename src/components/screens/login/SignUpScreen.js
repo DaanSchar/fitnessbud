@@ -114,7 +114,7 @@ const SignUpScreen = ({ navigation }) => {
               </LinearGradient>
             </TouchableOpacity>
 
-            {/* back button */}
+            {/* back darkButton */}
             <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
               <MaterialIcons name='navigate-before' color={getColor().primary} size={20}/>
               <Text style={styles.backText}>Back to login</Text>
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     width: '85%',
   },
 
-  //button
+  //darkButton
   buttonContainer: {
     marginTop: 30,
   },

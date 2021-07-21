@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  //create exercise button
+  //create exercise darkButton
   button: {
     marginBottom: 20,
     backgroundColor: getColor().primary,

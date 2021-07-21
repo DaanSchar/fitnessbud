@@ -1,6 +1,7 @@
 const initialState = {
   workout: null,
   exercises: [],
+  date: null,
 }
 
 export const activeWorkoutReducer = (state = initialState, action) => {
@@ -11,6 +12,8 @@ export const activeWorkoutReducer = (state = initialState, action) => {
       return addWeightToSet(state, action);
     case 'ADD_REPS_TO_SET':
       return addRepsToSet(state, action);
+    case 'RESET_WORKOUT':
+      return initialState;
   }
   return state;
 }
@@ -20,6 +23,7 @@ function initActiveWorkout(state, action) {
     ...state,
     workout: action.workout,
     exercises: action.workout.exercises,
+    date: new Date(),
   }
 }
 

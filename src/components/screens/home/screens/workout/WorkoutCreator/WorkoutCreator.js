@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     color: getColor().error,
   },
 
-  // button
+  // darkButton
   addButton: {
     marginTop: 30,
     backgroundColor: getColor().primary,

@@ -35,11 +35,12 @@ const LoginManager = ({ retrieveToken, login, logout, register, loginState, }) =
     setTimeout(() => {
       console.log(loginState)
       retrieveToken(loginState.userToken);
-    }, 1000 )
+    }, 10 ) // TODO: change back to 1000 ms
   },[])
 
-  if ( loginState.isLoading )
-    return <LoadingScreen/>
+  // TODO: uncomment this
+  // if ( loginState.isLoading )
+  //   return <LoadingScreen/>
 
 
   return (

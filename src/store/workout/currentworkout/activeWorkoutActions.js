@@ -22,3 +22,9 @@ export const addRepsToSet = (exercise, set, reps) => {
     reps: reps,
   }
 }
+
+export const resetWorkout = () => {
+  return {
+    type: 'RESET_WORKOUT',
+  }
+}
