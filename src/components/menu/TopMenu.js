@@ -9,8 +9,8 @@ const TopMenu = ({ navigation }) => {
       <StatusBar backgroundColor={getColor().background} barStyle={'dark-content'}/>
 
       {/* Menu Button*/}
-      <TouchableOpacity onPress={() => navigation.openDrawer()}>
-        <Feather name='menu' size={26} color={getColor().primary}/>
+      <TouchableOpacity style={{width: 30}} onPress={() => navigation.openDrawer()}>
+          <Feather name='menu' size={30} color={getColor().primary}/>
       </TouchableOpacity>
 
     </View>

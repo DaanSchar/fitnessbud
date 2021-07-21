@@ -3,11 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from '../../context'
 import * as loginActions from '../../../store/login/loginActions'
 import { connect } from "react-redux";
-import TabNav from "../../navigation/TabNav";
-import RootStackScreen from "./RootStackScreen";
-import LoadingScreen from "../LoadingScreen";
-import Home from "../Home";
-import Tab from "native-base/src/components/composites/Tabs/Tab";
+import LoadingScreen from "../loadingscreens/LoadingScreen";
 import AppNavigation from "../../navigation/AppNavigator";
 
 
@@ -37,18 +33,20 @@ const LoginManager = ({ retrieveToken, login, logout, register, loginState, }) =
 
   useEffect(() => {
     setTimeout(() => {
+      console.log(loginState)
       retrieveToken(loginState.userToken);
-    }, 1000 )
+    }, 10 ) // TODO: change back to 1000 ms
   },[])
 
-  if ( loginState.isLoading )
-    return <LoadingScreen/>
+  // TODO: uncomment this
+  // if ( loginState.isLoading )
+  //   return <LoadingScreen/>
 
 
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {/*{loginState.userToken !== null ? <AppNavigation/> : <RootStackScreen/>}*/}
+        {/*{loginState.userToken !== null ? <AppNavigation/> : <LoginStack/>}*/}
         <AppNavigation/>
       </NavigationContainer>
     </AuthContext.Provider>

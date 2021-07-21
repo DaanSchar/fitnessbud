@@ -1,6 +1,6 @@
 export const palette = {
   a: '#03254c',
-  b: '#1167b1',
+  b: '#315176',
   c: '#187bcd',
   d: '#2a9df4',
   e: '#d0efff',
@@ -21,6 +21,10 @@ export const color = {
 
   white: 'white',
   black: 'black',
+  delete: '#9a0c0c',
+  error: 'red',
+
+  success: '#6cb67c'
 }
 
 const darkTheme = {
