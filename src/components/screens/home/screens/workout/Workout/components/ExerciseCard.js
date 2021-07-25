@@ -91,7 +91,7 @@ const ExerciseCard = ({ exercise, activeWorkout, addWeightToSet, addRepsToSet, a
 
         {/* Sets */}
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View  style={{paddingBottom: 50}}>
+          <View  style={ exercise.quantity > 3 ? {paddingBottom: 0} : null}>
             {
               setArray.map((number) => { return set(number) })
             }
