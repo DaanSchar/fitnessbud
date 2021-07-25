@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import { Animated, FlatList, View, StyleSheet } from "react-native";
 import ExerciseCard from "./ExerciseCard";
 import Paginator from "./Paginator";
+import { connect } from "react-redux";
 
-const Carousel = ({ selectedWorkout }) => {
+const Carousel = ({ workout }) => {
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,7 +16,7 @@ const Carousel = ({ selectedWorkout }) => {
   return (
     <View style={styles.container}>
 
-      <FlatList data={selectedWorkout.exercises}
+      <FlatList data={workout.exercises}
                 keyExtractor={(exercise) => exercise.id}
                 horizontal
                 pagingEnabled
@@ -32,18 +33,25 @@ const Carousel = ({ selectedWorkout }) => {
 
       {/* Paginator */}
       <View style={styles.paginator}>
-        <Paginator data={selectedWorkout.exercises} scrollX={scrollX}/>
+        <Paginator data={workout.exercises} scrollX={scrollX}/>
       </View>
 
     </View>
   )
 }
 
-export default (Carousel);
+const mapStateToProps = (state) => ({
+  workout: state.activeWorkout
+})
+
+export default connect(mapStateToProps)(Carousel);
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   paginator: {
-    marginTop: 50,
+    marginTop: 30,
     alignSelf: 'center',
   },
 })

@@ -165,7 +165,6 @@ const Workout = ({ navigation, selectedWorkout, isFinished }) => {
   }
 
   return (
-    <ScrollView>
       <View style={styles.container}>
 
         {/* Timer  Modal */}
@@ -196,7 +195,7 @@ const Workout = ({ navigation, selectedWorkout, isFinished }) => {
         </View>
 
         {/* Flat list */}
-        <Carousel selectedWorkout={selectedWorkout}/>
+        <Carousel/>
 
         {/* Finish Button*/}
         <View style={styles.buttonContainer}>
@@ -209,7 +208,6 @@ const Workout = ({ navigation, selectedWorkout, isFinished }) => {
         </View>
 
       </View>
-    </ScrollView>
   )
 }
 
@@ -241,6 +239,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     alignItems: 'center',
   },
+
 
   // modal
   modalContainer: {

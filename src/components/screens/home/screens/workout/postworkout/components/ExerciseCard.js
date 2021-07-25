@@ -5,7 +5,11 @@ import { getColor } from "../../../../../../../../assets/colors/color";
 const ExerciseCard = ({ exercise }) => {
 
   if ( exercise.reps === undefined && exercise.reps === undefined)
-    return (<View></View>)
+    return (
+      <View>
+        <Text></Text>
+      </View>
+    )
 
 
   return (
@@ -17,8 +21,8 @@ const ExerciseCard = ({ exercise }) => {
         <View>
           {
             exercise.reps.map((reps, index) => (
-              <View>
-                <Text style={[styles.text, { width: 70 }]}>{reps} x {exercise.weight[index]}</Text>
+              <View key={index.toString()}>
+                <Text style={[styles.text, { width: 70 }]}>{ reps === -1 || exercise.weight === undefined ? null : reps + ' x ' + exercise.weight[index] }</Text>
               </View>
             ))
           }

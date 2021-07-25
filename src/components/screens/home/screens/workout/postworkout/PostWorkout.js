@@ -4,29 +4,30 @@ import { Text, View, StyleSheet, FlatList, TouchableOpacity } from "react-native
 import { getColor } from "../../../../../../../assets/colors/color";
 import { DarkButton } from "../../../../../menu/DarkButton";
 import ExerciseCard from "./components/ExerciseCard";
+import * as activeWorkoutActions from "../../../../../../store/workout/currentworkout/activeWorkoutActions";
 
-const PostWorkout = ({ navigation, activeWorkoutName, activeExercises }) => {
+const PostWorkout = ({ navigation, activeWorkout, }) => {
   return (
     <View style={styles.container}>
 
       {/* title*/}
       <View style={styles.titleContainer}>
         <Text style={[styles.title, {  marginTop: 20 }]}>Great Job!</Text>
-        <Text style={[styles.title, {  marginTop: 10, fontFamily: 'DMSans-Regular'}]}> You've Finished { activeWorkoutName } </Text>
+        <Text style={[styles.title, {  marginTop: 10, fontFamily: 'DMSans-Regular'}]}> You've Finished { activeWorkout.workout.name } </Text>
       </View>
 
       <View style={styles.resultContainer}>
         <Text style={[styles.title, { fontSize: 25, fontFamily: 'DMSans-Regular' , borderBottomWidth: 1.5, borderColor: getColor().border }]}> Result</Text>
 
         <FlatList
-        data={activeExercises} keyExtractor={(exercise) => exercise.id} renderItem={ ({ item } ) => (
+        data={activeWorkout.exercises} keyExtractor={(exercise) => exercise.id} renderItem={ ({ item } ) => (
           <ExerciseCard exercise={item}/>
         )} />
 
       </View>
 
       <View style={styles.doneButton}>
-        <TouchableOpacity onPress={() => navigation.navigate('WorkoutSelector')} style={{alignSelf: 'center', marginTop: 30}}>
+        <TouchableOpacity onPress={() => { navigation.navigate("WorkoutSelector"); }} style={{alignSelf: 'center', marginTop: 30}}>
           <DarkButton text={'Done'} size={28}/>
         </TouchableOpacity>
       </View>
@@ -36,13 +37,13 @@ const PostWorkout = ({ navigation, activeWorkoutName, activeExercises }) => {
 
 const mapStateToProps = (state, ownProps) => ({
   navigation: ownProps.navigation,
-  activeWorkoutName: state.activeWorkout.workout.name,
-  activeExercises: state.activeWorkout.exercises,
+  activeWorkout: state.activeWorkout,
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
+    resetActiveWorkout: () => dispatch(activeWorkoutActions.resetWorkout())
   }
 }
 

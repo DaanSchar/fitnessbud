@@ -19,7 +19,7 @@ const WorkoutSelector = ({ navigation, workouts, resetCreator, selectWorkout, in
 
       {/* Title */}
       <TouchableOpacity onPress={() => console.log(workouts)}>
-      <Text style={styles.title}>Pick a Workout</Text>
+        <Text style={styles.title}>Pick a Workout</Text>
       </TouchableOpacity>
 
       {/* WorkoutSelector FlatList*/}

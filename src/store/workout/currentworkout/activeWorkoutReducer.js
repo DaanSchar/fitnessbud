@@ -19,10 +19,11 @@ export const activeWorkoutReducer = (state = initialState, action) => {
 }
 
 function initActiveWorkout(state, action) {
+  const workout = { ...action.workout };
+
   return {
-    ...state,
-    workout: action.workout,
-    exercises: action.workout.exercises,
+    workout: workout,
+    exercises:  cloneObjectArray(workout.exercises),
     date: new Date(),
   }
 }
@@ -35,7 +36,6 @@ function addWeightToSet(state, action) {
 
   let exercises = state.exercises;
   let index = indexOfExercise(state, exercise);
-
 
   if (exercises[index].weight === undefined)
     exercises[index].weight = new Array(exercise.quantity).fill(-1);
@@ -95,4 +95,18 @@ function isFinishedWorkout(state, exercises) {
       return false;
 
   return true;
+}
+
+// this methods clones an array containing objects, as doing a shallow clone of this type
+// of array results in a unique copy of the array, but the same pointers to the objects as
+// the original array
+function cloneObjectArray(array) {
+
+  let copyArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    copyArray.push({...array[i]});
+  }
+
+  return copyArray;
 }

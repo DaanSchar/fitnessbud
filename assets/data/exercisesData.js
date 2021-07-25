@@ -51,7 +51,7 @@ export const exercisesData = [
     category: 'Triceps'
   },
   {
-    id: '9',
+    id: '10',
     name: 'Triceps bench Dips',
     category: 'Triceps'
   },

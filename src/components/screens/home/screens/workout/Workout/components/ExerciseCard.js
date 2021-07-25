@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   TextInput,
-  Dimensions, TouchableHighlight,
+  Dimensions, TouchableHighlight, ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { getColor } from "../../../../../../../../assets/colors/color";
@@ -80,21 +80,23 @@ const ExerciseCard = ({ exercise, activeWorkout, addWeightToSet, addRepsToSet, a
   }
 
   return (
-    <View style={[styles.container,  exerciseIsDone ? {borderColor: getColor().success} : null ]}>
+    <View showsVerticalScrollIndicator={false} style={[styles.container,  exerciseIsDone ? {borderColor: getColor().success} : null ]}>
       <View style={styles.contentContainer}>
 
         {/* Exercise Title */}
         <View style={styles.titleContainer}>
-          <TouchableHighlight onPress={() => { console.log(activeWorkout) }}>
-            <Text style={[styles.title,  exerciseIsDone ? {color: getColor().success} : null ]}>{exercise.name}</Text>
-          </TouchableHighlight>
+          <Text style={[styles.title,  exerciseIsDone ? {color: getColor().success} : null ]}>{exercise.name}</Text>
+          <Text style={[{ fontFamily: 'DMSans-SemiBold', color: getColor().textDark, fontSize: 20,} ,  exerciseIsDone ? {color: getColor().success} : null ]}>{exercise.quantity} Sets</Text>
         </View>
 
         {/* Sets */}
-        {
-          setArray.map((number) => { return set(number) })
-        }
-
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View  style={{paddingBottom: 50}}>
+            {
+              setArray.map((number) => { return set(number) })
+            }
+          </View>
+        </ScrollView>
       </View>
     </View>
   )
@@ -123,11 +125,10 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: getColor().border,
     borderRadius: 20,
-    flex: 0.7,
     marginHorizontal: 20,
+    flex: 1,
   },
   titleContainer: {
-    flexDirection: 'row',
     marginHorizontal: 10,
     borderColor: getColor().border,
   },
@@ -135,7 +136,6 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontFamily: 'DMSans-Bold',
     color: getColor().textDark,
-    alignSelf: 'center',
   },
   contentContainer:  {
     marginTop: 20,
