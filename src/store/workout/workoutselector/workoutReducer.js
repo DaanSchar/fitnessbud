@@ -1,4 +1,4 @@
-const { workoutData } = require("../../../../assets/data/workoutData");
+const { workoutData } = require("../../../../assets/data/workout/workoutData");
 const initialState = {
   workouts: workoutData,
   selectedWorkout: null

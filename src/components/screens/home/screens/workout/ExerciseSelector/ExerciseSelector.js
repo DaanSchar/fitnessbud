@@ -3,7 +3,7 @@ import BackButton from "../../../../../menu/BackButton";
 import React from 'react';
 import { getColor } from "../../../../../../../assets/colors/color";
 import ExerciseCard from "./components/ExerciseCard";
-import { exercisesData } from "../../../../../../../assets/data/exercisesData";
+import { exercisesData } from "../../../../../../../assets/data/workout/exercisesData";
 import * as workoutCreatorActions from "../../../../../../store/workout/workoutcreator/workoutCreatorActions";
 import { connect } from "react-redux";
 

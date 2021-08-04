@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginHorizontal: 20,
     flex: 1,
+    height: '100%',
   },
   titleContainer: {
     marginHorizontal: 10,

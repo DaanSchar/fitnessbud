@@ -3,7 +3,7 @@ import React from "react";
 import { getColor } from "../../../../../../../assets/colors/color";
 import Feather from "react-native-vector-icons/Feather";
 import WorkOutCard from "./components/WorkoutCard";
-import { workoutData } from "../../../../../../../assets/data/workoutData";
+import { workoutData } from "../../../../../../../assets/data/workout/workoutData";
 import TopMenu from "../../../../../menu/TopMenu";
 import * as workoutCreatorActions from "../../../../../../store/workout/workoutcreator/workoutCreatorActions";
 import * as workoutActions from "../../../../../../store/workout/workoutselector/workoutActions";

@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Animated } from "react-native
 import Feather from "react-native-vector-icons/Feather";
 import { getColor } from "../../../../../../../../assets/colors/color";
 import React from "react";
-import { exercisesData } from "../../../../../../../../assets/data/exercisesData";
+import { exercisesData } from "../../../../../../../../assets/data/workout/exercisesData";
 import * as workoutCreatorActions from "../../../../../../../store/workout/workoutcreator/workoutCreatorActions";
 import * as workoutActions from "../../../../../../../store/workout/workoutselector/workoutActions";
 import { connect } from "react-redux";

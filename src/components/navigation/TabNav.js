@@ -4,10 +4,11 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { color, getColor } from "../../../assets/colors/color";
 import { StyleSheet, Text, View } from "react-native";
 import Home from "../screens/home/screens/home/Home";
-import Tab1 from "../screens/home/screens/tab1/Tab1";
+import FoodOverview from "../screens/home/screens/food/foodoverview/FoodOverview.js";
 import Workout from "../screens/home/screens/workout/workoutSelector/WorkoutSelector";
-import WorkoutStack from "./WorkoutStack";
+import WorkoutStack from "./stack/WorkoutStack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import FoodStack from "./stack/FoodStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +42,7 @@ const TabNav = () => {
       }}
     >
       { tabScreen('Home', Home, 'home')}
-      { tabScreen('Tab1', Tab1, 'chart-timeline-variant')}
+      { tabScreen('Food', FoodStack, 'chart-timeline-variant')}
       { tabScreen('Workout', WorkoutStack, 'weight-lifter')}
     </Tab.Navigator>
   )
