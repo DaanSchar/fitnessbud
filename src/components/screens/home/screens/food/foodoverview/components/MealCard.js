@@ -4,6 +4,7 @@ import { getColor } from "../../../../../../../../assets/colors/color";
 
 const MealCard = ({ item }) => {
 
+
   let meal = item.meal;
   let totalKCal = meal.kcal * item.portionSize;
 

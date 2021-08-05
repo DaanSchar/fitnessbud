@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Text, FlatList } from "react-native";
 import { getColor } from "../../../../../../../../assets/colors/color";
-import { mealData } from "../../../../../../../../assets/data/food/mealData";
 import MealCard from "./MealCard";
+import { connect } from "react-redux";
 
-const DayOverview = () => {
+const DayOverview = ({ meals }) => {
 
   const mealCard = ({ item }) => {
     return (
@@ -17,13 +17,17 @@ const DayOverview = () => {
       <Text style={[styles.title, { paddingVertical: 10,}]}> Today's Meals:</Text>
 
       <View style={{ flex: 1 }}>
-        <FlatList data={mealData.meals} renderItem={mealCard} keyExtractor={(item => item.id)}/>
+        <FlatList data={meals} renderItem={mealCard} keyExtractor={((item, index) => index)}/>
       </View>
     </View>
   )
 }
 
-export default (DayOverview);
+const mapStateToProps = (state, ownProps) => ({
+  meals: state.currentMeals.meals,
+})
+
+export default connect(mapStateToProps)(DayOverview);
 
 const styles = StyleSheet.create({
   container: {

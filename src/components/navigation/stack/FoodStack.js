@@ -1,14 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from "react-native";
 import { getColor } from "../../../../assets/colors/color";
-import WorkoutSelector from "../../screens/home/screens/workout/workoutSelector/WorkoutSelector";
 import { createStackNavigator } from "@react-navigation/stack";
-import WorkoutCreator from "../../screens/home/screens/workout/WorkoutCreator/WorkoutCreator";
-import ExerciseSelector from "../../screens/home/screens/workout/ExerciseSelector/ExerciseSelector";
-import Workout from "../../screens/home/screens/workout/Workout/Workout";
-import PostWorkout from "../../screens/home/screens/workout/postworkout/PostWorkout";
 import FoodOverview from "../../screens/home/screens/food/foodoverview/FoodOverview";
 import MealCreator from "../../screens/home/screens/food/mealcreator/MealCreator";
+import AdjustMeal from "../../screens/home/screens/food/adjustmeal/AdjustMeal";
 
 
 const Stack = createStackNavigator();
@@ -20,6 +16,7 @@ const LoginStack = ({ navigation }) => {
       <Stack.Navigator headerMode='none'>
         <Stack.Screen name='FoodOverview' component={FoodOverview}/>
         <Stack.Screen name='MealCreator' component={MealCreator}/>
+        <Stack.Screen name='AdjustMeal' component={AdjustMeal}/>
       </Stack.Navigator>
     </View>
 

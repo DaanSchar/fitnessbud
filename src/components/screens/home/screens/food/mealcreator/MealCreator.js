@@ -4,6 +4,7 @@ import { getColor } from "../../../../../../../assets/colors/color";
 import BackButton from "../../../../../menu/BackButton";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import ScanButton from "./components/ScanButton";
+import MealCardList from "./components/MealCardList";
 
 const MealCreator = ({ navigation }) => {
   return (
@@ -25,9 +26,11 @@ const MealCreator = ({ navigation }) => {
           <MaterialIcons name={'search'} color={getColor().primary} size={20}/>
           <TextInput placeholder={'search for food'}/>
         </View>
+
+        <MealCardList navigation={navigation}/>
+
       </View>
 
-      <Text>adding meal!</Text>
     </View>
   )
 }

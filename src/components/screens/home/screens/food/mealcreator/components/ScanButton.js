@@ -6,7 +6,7 @@ import { getColor } from "../../../../../../../../assets/colors/color";
 const ScanButton = () => {
   return(
     <View>
-      <MaterialIcons name={'flip'} size={25} color={getColor().secondary}/>
+      <MaterialIcons name={'fit-screen'} size={25} color={getColor().secondary}/>
       <Text style={styles.title}>Scan</Text>
     </View>
   )
